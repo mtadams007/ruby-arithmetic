@@ -61,3 +61,53 @@ def divide(a,b,num_of_sig_figs=10)
 end
 puts divide(11,2,10)
 puts divide(58.234,13.4,10)
+
+
+
+def binary_add(bin1,bin2)
+  sum = ''
+  carry = '0'
+  #figuring out which number is longer to put on top.
+  if bin1.length >= bin2.length
+    top=bin1
+    bottom=bin2
+  else
+    top=bin2
+    bottom=bin1
+  end
+  while bottom.length < top.length
+    bottom = '0' + bottom
+  end
+  i = bottom.length
+  counter = 0
+  while counter < i
+    if carry == '0'
+      if top[i-counter-1] == '0' and bottom[i-counter-1] == '0'
+        sum = '0' + sum
+      elsif top[i-counter-1] == '1' and bottom[i-counter-1] == '1'
+        sum = '0' + sum
+        carry = '1'
+      else
+        sum = '1' + sum
+      end
+    else
+      if top[i-counter-1] == '0' and bottom[i-counter-1] == '0'
+        sum = '1' + sum
+        carry = '0'
+      elsif top[i-counter-1] == '1' and bottom[i-counter-1] == '1'
+        sum = '1' + sum
+      else
+        sum = '0' + sum
+      end
+    end
+    counter += 1
+  end
+    if carry == '1'
+      sum = '1' + sum
+  end
+  sum
+end
+
+puts binary_add('111','11')
+puts binary_add('10','10')
+puts binary_add('10101','1010')
